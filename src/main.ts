@@ -8,7 +8,7 @@ import { msalInstance } from './plugins/msal'
 import Particles from '@tsparticles/vue3'
 import { loadSlim } from '@tsparticles/slim'
 
-await msalInstance.initialize()
+msalInstance.initialize()
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

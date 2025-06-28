@@ -17,7 +17,7 @@ import { msalInstance } from '@/plugins/msal'
 
 const requestedScopes: msal.PopupRequest = {
   scopes: ['openid', 'profile', 'offline_access', 'User.Read', 'Mail.Read'],
-  redirectUri: 'http://localhost:5173'
+  redirectUri: import.meta.env.VITE_AZURE_AD_REDIRECT_URI as string
 }
 const userStore = useUser()
 const loading = ref(false)

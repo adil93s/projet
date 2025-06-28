@@ -5,7 +5,7 @@ import * as msal from '@azure/msal-browser'
 export const msalInstance = new msal.PublicClientApplication({
   auth: {
     clientId: import.meta.env.VITE_AZURE_CLIENT_ID as string,
-    redirectUri: 'http://localhost:5173'
+    redirectUri: import.meta.env.VITE_AZURE_AD_REDIRECT_URI as string
   },
   cache: {
     cacheLocation: 'sessionStorage'

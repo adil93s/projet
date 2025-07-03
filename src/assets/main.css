@@ -3,8 +3,9 @@
 @config "../../tailwind.config.ts";
 
 @layer base {
-  body {
-    @apply bg-neutral-800;
+  .scrollbar-custom {
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20;
+    @apply hover:scrollbar-thumb-white/30;
   }
 }
 
@@ -37,7 +38,81 @@
     height: 1px;
     background: linear-gradient(to right, transparent, #525252, transparent);
   }
+  .beautiful-shadow {
+    box-shadow:
+      0px 0px 0px 1px rgba(0, 0, 0, 0.06),
+      0px 1px 1px -0.5px rgba(0, 0, 0, 0.06),
+      0px 3px 3px -1.5px rgba(0, 0, 0, 0.06),
+      0px 6px 6px -3px rgba(0, 0, 0, 0.06),
+      0px 12px 12px -6px rgba(0, 0, 0, 0.06),
+      0px 24px 24px -12px rgba(0, 0, 0, 0.06);
+  }
+  .v-popper--theme-tooltip .v-popper__inner {
+    @apply !bg-black !text-white !text-xs !font-medium !px-2 !py-1.5 !rounded-lg;
+  }
+  .v-popper--theme-tooltip .v-popper__arrow-outer {
+    @apply !hidden;
+  }
+  .ql-editor {
+    @apply !max-h-48 !min-h-48 font-inter;
+  }
+
+  .ql-toolbar {
+    @apply rounded-t-xl bg-neutral-700/60 !border-neutral-500;
+  }
+
+  .ql-snow.ql-toolbar button .ql-stroke {
+    @apply !stroke-neutral-300;
+  }
+
+  .ql-snow.ql-toolbar button .ql-fill {
+    @apply !fill-neutral-300;
+  }
+
+  .ql-snow.ql-toolbar button:hover {
+    @apply !bg-neutral-600/60 rounded-lg;
+  }
+
+  .ql-snow.ql-toolbar button.ql-active {
+    @apply !bg-neutral-600 rounded-lg;
+  }
+
+  .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+    @apply !stroke-white;
+  }
+
+  .ql-snow.ql-toolbar button.ql-active .ql-fill {
+    @apply !fill-white;
+  }
+
+  .ql-container {
+    @apply rounded-b-xl bg-neutral-700/60  !border-neutral-500;
+  }
 }
 
 @layer utilities {
+  .dashboard {
+    @apply grid h-dvh w-full overflow-hidden
+             transition-all duration-300;
+    grid-template-areas: 'sidebar main';
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-rows: 100vh;
+    max-height: 100vh;
+  }
+
+  .sidebar-open {
+    --sidebar-w: var(--sidebar-expanded);
+  }
+  .sidebar-close {
+    --sidebar-w: var(--sidebar-collapsed);
+  }
+}
+
+@utility scrollbar-hidden {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
+@theme {
+  --sidebar-expanded: 16rem;
+  --sidebar-collapsed: 3.5rem;
 }

@@ -1,22 +1,23 @@
 <template>
   <button
-    class="flex items-center gap-2 rounded-xl justify-between"
+    class="flex items-center gap-2 rounded-xl justify-between relative"
     :class="[
-      upload ? 'relative overflow-hidden' : '',
       fullWidth ? 'w-full' : 'w-fit',
       disabled || loading ? 'opacity-50' : '',
       !disabled && !loading ? 'cursor-pointer' : '',
       bgColor,
       border,
       padding,
-      shadow
+      shadow,
+      gap
     ]"
     :disabled="disabled || loading"
     @click="$emit('click', $event)"
   >
     <div
-      class="flex items-center gap-2"
+      class="flex items-center"
       :class="[
+        gap,
         fullWidth ? 'w-full' : 'w-fit',
         align === 'left' ? 'justify-start' : align === 'right' ? 'justify-end' : 'justify-center'
       ]"
@@ -52,13 +53,6 @@
       </svg>
     </div>
     <slot name="leading"></slot>
-    <input
-      v-if="upload"
-      type="file"
-      :multiple="multiple"
-      class="absolute inset-0 opacity-0 cursor-pointer"
-      @change="onFileChange"
-    />
   </button>
 </template>
 
@@ -90,6 +84,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  gap: {
+    type: String,
+    default: 'gap-2'
+  },
   align: {
     type: String,
     default: 'center'
@@ -101,34 +99,17 @@ const props = defineProps({
   paddingXY: {
     type: String,
     default: 'px-4 py-2.5'
-  },
-  upload: {
-    type: Boolean,
-    default: false
-  },
-  multiple: {
-    type: Boolean,
-    default: false
   }
 })
 
 const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void
-  (e: 'files-selected', files: FileList): void
 }>()
-
-function onFileChange(e: Event) {
-  const files = (e.target as HTMLInputElement).files
-  if (files && files.length) {
-    emit('files-selected', files)
-    ;(e.target as HTMLInputElement).value = ''
-  }
-}
 
 const bgColor = computed(() => {
   switch (props.variant) {
     case 'primary':
-      return 'bg-neutral-900'
+      return 'bg-neutral-700'
     case 'secondary':
       return 'bg-white'
     case 'link':

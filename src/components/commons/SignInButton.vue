@@ -1,22 +1,22 @@
 <template>
-  <BaseButton @click="signIn" :loading="loading" variant="secondary">
+  <Button @click="signIn" :loading="loading" variant="secondary">
     <template #icon>
       <IconMicrosoft :size="18" class="text-neutral-900" />
     </template>
     <span>Continuer avec Microsoft</span>
-  </BaseButton>
+  </Button>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import BaseButton from '@/components/buttons/BaseButton.vue'
+import Button from '@/components/buttons/Button.vue'
 import IconMicrosoft from '@/components/icons/IconMicrosoft.vue'
 import * as msal from '@azure/msal-browser'
 import { useUser } from '@/stores/user'
 import { msalInstance } from '@/plugins/msal'
 
 const requestedScopes: msal.PopupRequest = {
-  scopes: ['openid', 'profile', 'offline_access', 'User.Read', 'Mail.Read'],
+  scopes: ['openid', 'profile', 'offline_access', 'User.Read', 'Mail.Read', 'Files.Read.All'],
   redirectUri: import.meta.env.VITE_AZURE_AD_REDIRECT_URI as string
 }
 const userStore = useUser()

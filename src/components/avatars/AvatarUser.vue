@@ -36,7 +36,7 @@ const props = withDefaults(
     width: 'w-24',
     height: 'h-24',
     fontSize: 'text-base',
-    rounded: 'rounded-full'
+    rounded: 'rounded-xl'
   }
 )
 </script>

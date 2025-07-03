@@ -2,7 +2,7 @@
   <div class="flex items-center gap-x-2">
     <span class="text-sm font-normal text-medium text-left">Montrer par page</span>
     <select
-      class="pl-2 py-1 text-xs font-medium rounded-lg border-r-white border-r-8 shadow-medium font-inter text-neutral-900 bg-white outline outline-neutral-200"
+      class="pl-2 py-1 text-xs font-medium border-r-transparent border-r-8 shadow-medium font-inter text-white bg-neutral-800/30 hover:bg-neutral-700/30 backdrop-blur-md rounded-xl outline outline-neutral-700 cursor-pointer"
       :value="currentPerPage"
       @change="onChange"
     >

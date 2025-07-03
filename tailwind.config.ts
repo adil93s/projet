@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import scrollbar from 'tailwind-scrollbar'
 
 const config: Config = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -20,6 +21,7 @@ const config: Config = {
         black: '#000000',
         transparent: 'transparent',
         light: '#FAFCFE',
+        'neutral-850': '#222222',
         success: {
           DEFAULT: '#a4f4e7',
           50: '#FCFFFD',
@@ -35,11 +37,17 @@ const config: Config = {
           300: '#CC7914'
         },
         error: {
-          DEFAULT: '#e4626f',
-          50: '#FFFCFC',
-          100: '#FEF2F2',
-          200: '#C03744',
-          300: '#8c1823'
+          DEFAULT: '#f31260',
+          50: '#fee7ef',
+          100: '#fdd0df',
+          200: '#faa0bf',
+          300: '#f871a0',
+          400: '#f54180',
+          500: '#f31260',
+          600: '#c20e4d',
+          700: '#920b3a',
+          800: '#610726',
+          900: '#310413'
         }
       },
       boxShadow: {
@@ -48,7 +56,7 @@ const config: Config = {
         high: '0px 1px 2px 0px rgba(16, 24, 40, 0.05), 1px 1px 8px 0px rgba(16, 24, 40, 0.05)'
       },
       fontFamily: {
-        mulish: ['Inter']
+        inter: ['Inter']
       },
       maxHeight: {
         46: '11.5rem',
@@ -71,7 +79,7 @@ const config: Config = {
       }
     }
   },
-  plugins: []
+  plugins: [scrollbar({ nocompatible: true })]
 }
 
 export default config

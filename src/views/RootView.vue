@@ -7,6 +7,7 @@ import { computed, onMounted } from 'vue'
 import { useUser } from '@/stores/user'
 import { useRoute, useRouter } from 'vue-router'
 import { msalInstance } from '@/plugins/msal'
+import { Routes } from '@/router/routes'
 
 const userStore = useUser()
 const route = useRoute()
@@ -19,7 +20,7 @@ onMounted(async () => {
 
   if (route.name === 'root') {
     if (user.value === undefined || user.value === null) {
-      router.replace({ name: 'auth_login' })
+      router.replace({ name: Routes.AUTH_LOGIN })
       return
     }
 

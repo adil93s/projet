@@ -1,18 +1,13 @@
 <template>
   <div class="flex flex-col gap-2 p-8">
     Here comes the content of the home page
-    <BaseButton
-      :loading="isLoading"
-      :disabled="isDisabled"
-      @click="handleClick"
-      variant="secondary"
-    >
+    <Button :loading="isLoading" :disabled="isDisabled" @click="handleClick" variant="secondary">
       Disabled and animated for 2 seconds if clicked
-    </BaseButton>
+    </Button>
   </div>
 </template>
 <script setup lang="ts">
-import BaseButton from '@/components/buttons/BaseButton.vue'
+import Button from '@/components/buttons/Button.vue'
 import { ref } from 'vue'
 
 const isLoading = ref(false)

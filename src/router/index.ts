@@ -28,29 +28,82 @@ const router = createRouter({
           beforeEnter: authGuard,
           children: [
             {
-              path: 'dashboard',
+              path: 'messages',
               component: () => import('@/components/Proxy.vue'),
               children: [
                 {
                   path: '',
-                  name: Routes.APP_DASHBOARD,
-                  component: () => import('@/views/app/dashboard/DashboardView.vue')
+                  name: Routes.APP_MESSAGE_LIST,
+                  component: () => import('@/views/app/message/MessageListView.vue')
+                },
+                {
+                  path: ':message_id',
+                  name: Routes.APP_MESSAGE_DETAIL,
+                  component: () => import('@/views/app/message/MessageDetailView.vue')
                 }
               ]
             },
             {
-              path: 'conversations',
+              path: 'starred',
               component: () => import('@/components/Proxy.vue'),
               children: [
                 {
                   path: '',
-                  name: Routes.APP_CONVERSATION_LIST,
-                  component: () => import('@/views/app/conversation/ConversationListView.vue')
+                  name: Routes.APP_STARRED_LIST,
+                  component: () => import('@/views/app/starred/StarredListView.vue')
                 },
                 {
-                  path: ':conversation_id',
-                  name: Routes.APP_CONVERSATION_DETAIL,
-                  component: () => import('@/views/app/conversation/ConversationDetailView.vue')
+                  path: ':starred_id',
+                  name: Routes.APP_STARRED_DETAIL,
+                  component: () => import('@/views/app/starred/StarredDetailView.vue')
+                }
+              ]
+            },
+            {
+              path: 'sents',
+              component: () => import('@/components/Proxy.vue'),
+              children: [
+                {
+                  path: '',
+                  name: Routes.APP_SENT_LIST,
+                  component: () => import('@/views/app/sent/SentListView.vue')
+                },
+                {
+                  path: ':sent_id',
+                  name: Routes.APP_SENT_DETAIL,
+                  component: () => import('@/views/app/sent/SentDetailView.vue')
+                }
+              ]
+            },
+            {
+              path: 'drafts',
+              component: () => import('@/components/Proxy.vue'),
+              children: [
+                {
+                  path: '',
+                  name: Routes.APP_DRAFT_LIST,
+                  component: () => import('@/views/app/draft/DraftListView.vue')
+                },
+                {
+                  path: ':draft_id',
+                  name: Routes.APP_DRAFT_DETAIL,
+                  component: () => import('@/views/app/draft/DraftDetailView.vue')
+                }
+              ]
+            },
+            {
+              path: 'trash',
+              component: () => import('@/components/Proxy.vue'),
+              children: [
+                {
+                  path: '',
+                  name: Routes.APP_TRASH_LIST,
+                  component: () => import('@/views/app/trash/TrashListView.vue')
+                },
+                {
+                  path: ':trash_id',
+                  name: Routes.APP_TRASH_DETAIL,
+                  component: () => import('@/views/app/trash/TrashDetailView.vue')
                 }
               ]
             }

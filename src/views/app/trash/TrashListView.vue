@@ -33,7 +33,7 @@
               <TableData
                 :to="{
                   name: Routes.APP_TRASH_DETAIL,
-                  params: { message_id: message.id }
+                  params: { trash_id: message.id }
                 }"
                 class="text-white text-md"
               >
@@ -42,18 +42,18 @@
               <TableData
                 :to="{
                   name: Routes.APP_TRASH_DETAIL,
-                  params: { message_id: message.id }
+                  params: { trash_id: message.id }
                 }"
                 class="text-white text-md"
               >
-                <span class="whitespace-nowrap underline text-neutral-300">{{
+                <span class="inline-block underline text-neutral-300 truncate max-w-64">{{
                   message.from?.emailAddress?.address
                 }}</span>
               </TableData>
               <TableData
                 :to="{
                   name: Routes.APP_TRASH_DETAIL,
-                  params: { message_id: message.id }
+                  params: { trash_id: message.id }
                 }"
                 class="text-white text-md"
               >
@@ -62,7 +62,7 @@
               <TableData
                 :to="{
                   name: Routes.APP_TRASH_DETAIL,
-                  params: { message_id: message.id }
+                  params: { trash_id: message.id }
                 }"
                 class="text-white text-md"
               >
@@ -80,10 +80,12 @@
           <PageNumber route-name="app_trash_list" :query="route.query" />
         </div>
       </div>
-      <div v-else class="grow flex flex-col justify-center items-center gap-2 py-32">
+      <div v-else class="grow flex flex-col justify-center items-center gap-2 py-32 text-center">
         <EmptyMessage :size="150" />
-        <h2>Aucun message pour le moment</h2>
-        <p class="font-inter text-neutral-300 text-md">
+        <h2 class="text-xl font-semibold text-white">
+          Aucun message dans la corbeille pour le moment
+        </h2>
+        <p class="font-inter text-neutral-300 text-sm">
           Vous n'avez pas encore de message. Vous pouvez en envoyer un à vous-même pour tester.
         </p>
       </div>

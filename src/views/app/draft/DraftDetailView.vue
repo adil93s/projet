@@ -1,6 +1,2 @@
-<template>
-  <div class="flex flex-col gap-2 p-8">
-    <h1>Draft Detail</h1>
-  </div>
-</template>
+<template></template>
 <script setup lang="ts"></script>

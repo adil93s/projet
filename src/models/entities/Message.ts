@@ -8,6 +8,8 @@ export class Message extends AbstractModel {
   ccRecipients?: any[]
   isRead?: boolean
   receivedDateTime?: string
+  sentDateTime?: string
+  flag?: any
   attachmentsCount?: number
 
   constructor(entity?: Partial<Message>) {

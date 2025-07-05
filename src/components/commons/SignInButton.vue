@@ -16,7 +16,15 @@ import { useUser } from '@/stores/user'
 import { msalInstance } from '@/plugins/msal'
 
 const requestedScopes: msal.PopupRequest = {
-  scopes: ['openid', 'profile', 'offline_access', 'User.Read', 'Mail.Read', 'Files.Read.All'],
+  scopes: [
+    'openid',
+    'profile',
+    'offline_access',
+    'User.Read',
+    'Mail.ReadWrite',
+    'Mail.Send',
+    'Files.ReadWrite.All'
+  ],
   redirectUri: import.meta.env.VITE_AZURE_AD_REDIRECT_URI as string
 }
 const userStore = useUser()

@@ -14,6 +14,7 @@
               <th>Expéditeur</th>
               <th>Message</th>
               <th>Date</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -70,6 +71,41 @@
                   moment(message.receivedDateTime).format('DD/MM/YYYY HH:mm')
                 }}</span>
               </TableData>
+              <TableData
+                :to="{
+                  name: Routes.APP_MESSAGE_DETAIL,
+                  params: { message_id: message.id }
+                }"
+                class="text-white text-md"
+              >
+                <div class="flex items-center gap-2 w-fit relative">
+                  <button
+                    class="cursor-pointer rounded-xl hover:bg-neutral-700/50 p-2"
+                    @click.stop.prevent="openComposeModal(message)"
+                  >
+                    <IconArrowReply :size="20" />
+                  </button>
+                  <button
+                    class="cursor-pointer rounded-xl hover:bg-neutral-700/50 p-2"
+                    @click.stop.prevent="handleStar(message)"
+                  >
+                    <IconStar
+                      :size="20"
+                      :class="
+                        message.flag?.flagStatus === 'flagged'
+                          ? 'text-yellow-500'
+                          : 'text-neutral-300 hover:text-white'
+                      "
+                    />
+                  </button>
+                  <button
+                    class="cursor-pointer hover:text-white rounded-xl hover:bg-neutral-700/50 p-2 text-neutral-300"
+                    @click.stop.prevent="handleTrash(message)"
+                  >
+                    <IconTrash :size="20" />
+                  </button>
+                </div>
+              </TableData>
             </tr>
           </tbody>
         </table>
@@ -104,6 +140,11 @@ import TableData from '@/components/tables/TableData.vue'
 import { Routes } from '@/router/routes'
 import Pagination from '@/components/pagination/Pagination.vue'
 import type { PaginationMeta } from '@/models/interfaces/PaginationMeta'
+import IconTrash from '@/components/icons/IconTrash.vue'
+import IconStar from '@/components/icons/IconStar.vue'
+import IconArrowReply from '@/components/icons/IconArrowReply.vue'
+
+const emit = defineEmits(['open-compose-modal'])
 
 const messages = ref<Message[]>([])
 const pagination = ref<Partial<PaginationMeta>>({ currentPage: 1, totalPages: 1 })
@@ -115,7 +156,41 @@ onMounted(() => {
   loadMessages()
 })
 
-const loadMessages = async () => {
+const openComposeModal = (message: Message) => {
+  emit('open-compose-modal', message)
+}
+
+const handleStar = async (message: Message) => {
+  try {
+    const newFlagStatus = message.flag?.flagStatus === 'flagged' ? 'notflagged' : 'flagged'
+
+    await axiosInstance.patch(`/me/messages/${message.id}`, {
+      flag: {
+        flagStatus: newFlagStatus
+      }
+    })
+    loadMessages(false)
+  } catch (error) {
+    console.error('Erreur lors du marquage:', error)
+  }
+}
+
+const handleTrash = async (message: Message) => {
+  try {
+    await axiosInstance.post(`/me/messages/${message.id}/move`, {
+      destinationId: 'deleteditems'
+    })
+    loadMessages(false)
+  } catch (error) {
+    console.error('Erreur lors de la mise à la corbeille:', error)
+  }
+}
+
+const loadMessages = async (showLoading = true) => {
+  if (showLoading) {
+    isDataLoading.value = true
+  }
+
   isDataLoading.value = true
 
   const currentPage = route.query.page ? parseInt(route.query.page as string) : 1
